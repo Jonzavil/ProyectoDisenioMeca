@@ -1,0 +1,636 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"
+  name="srbot">
+
+    <!-- Colors -->
+    <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+    </material>
+
+    <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+    </material>
+
+    <material name="orange">
+        <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
+    </material>  
+
+
+  <!-- Links -->
+  <link name="base_footprint"/> 
+
+  <!-- Base Link -->
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.0356238870540699 -4.03106731601266E-05 0.121501088820445"
+        rpy="0 0 0" />
+      <mass
+        value="0.590576967248925" />
+      <inertia
+        ixx="0.0046567534727676"
+        ixy="-3.38542710266083E-06"
+        ixz="-3.65561608583262E-05"
+        iyy="0.00284799695530918"
+        iyz="1.44504078186529E-05"
+        izz="0.00695313679415047" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0.0 0.0 0.007" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Caster Link -->
+  <link
+    name="front_link">
+    <inertial>
+      <origin
+        xyz="0 -0.0053142329433118 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.00502921680620392" />
+      <inertia
+        ixx="2.27248756479945E-07"
+        ixy="4.42927350742589E-24"
+        ixz="0"
+        iyy="2.27248756479945E-07"
+        iyz="0"
+        izz="2.27248756479945E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/front_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/front_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link
+    name="back_link">
+    <inertial>
+      <origin
+        xyz="0 0.0053142329433118 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.00502921680620392" />
+      <inertia
+        ixx="2.27248756479945E-07"
+        ixy="-4.42927350742589E-24"
+        ixz="0"
+        iyy="2.27248756479945E-07"
+        iyz="0"
+        izz="2.27248756479945E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/back_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/back_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <!-- Caster joint -->
+  <joint
+    name="caster_joint"
+    type="revolute">
+    <origin
+      xyz="0.1163 0.00023819 -0.0074277"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="front_link" />
+    <axis
+      xyz="1 1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+  <joint
+    name="caster_back_joint"
+    type="revolute">
+    <origin
+      xyz="-0.13399 0.0024897 -0.0073544"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="back_link" />
+    <axis
+      xyz="1 1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+
+  <!-- Camera Link -->
+  <link
+    name="camera_link">
+    <inertial>
+      <origin
+        xyz="-0.0193111246434702 -0.0125131683373471 -8.98842853076509E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.182526920714148" />
+      <inertia
+        ixx="0.000396274804867751"
+        ixy="4.58837222141318E-08"
+        ixz="4.4761660275352E-08"
+        iyy="3.59896813484765E-05"
+        iyz="5.27435714959667E-09"
+        izz="0.00040519781076824" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/camera_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/camera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <!-- Camera Joint -->
+  <joint
+    name="camera_joint"
+    type="fixed">
+    <origin
+      xyz="0.17228 0.0093241 0.80525"
+      rpy="0 -0.13494 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="camera_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <!-- Platform Link -->
+
+  <link
+    name="platform_link">
+    <inertial>
+      <origin
+        xyz="0.00524329305342652 -0.177275972417613 -3.07780343483111E-05"
+        rpy="0 0 0" />
+      <mass
+        value="5.20398239999135" />
+      <inertia
+        ixx="0.146191138478855"
+        ixy="-0.00734378144066615"
+        ixz="-6.06196116860792E-08"
+        iyy="0.0824945087110923"
+        iyz="-8.40710972180585E-08"
+        izz="0.195280459107958" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/platform_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/platform_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="platform_joint"
+    type="fixed">
+    <origin
+      xyz="-0.011831 -0.00043758 0.69827"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="platform_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  
+  <!-- Laser Link -->
+  <link
+    name="laser_link">
+    <inertial>
+      <origin
+        xyz="5.40724984460228E-05 0.000108936811619331 -0.0180203945533209"
+        rpy="0 0 0" />
+      <mass
+        value="0.040289883202866" />
+      <inertia
+        ixx="7.61642400584036E-06"
+        ixy="-9.92757716952495E-08"
+        ixz="5.59827255517888E-09"
+        iyy="7.68825864701491E-06"
+        iyz="5.26103062084025E-08"
+        izz="8.28455531132897E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/laser_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/laser_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <!-- Laser Joint -->
+  <joint
+    name="laser_joint"
+    type="fixed">
+    <origin
+      xyz="-0.054235 0.010992 0.1782"
+      rpy="0 0 -0.021983" />
+    <parent
+      link="base_link" />
+    <child
+      link="laser_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  
+  <!-- Wheel Right Link -->
+  <link
+    name="right_link">
+    <inertial>
+      <origin
+        xyz="0 -1.6475730502119E-11 0.0125"
+        rpy="0 0 0" />
+      <mass
+        value="0.139852680587454" />
+      <inertia
+        ixx="6.95414995242117E-05"
+        ixy="1.51610541975121E-30"
+        ixz="1.72958450439112E-33"
+        iyy="6.95414995242117E-05"
+        iyz="-7.24583105646219E-14"
+        izz="0.00012451501148723" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/right_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/right_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <!-- Wheel Right Joint -->
+  <joint
+    name="right_joint"
+    type="continuous">
+    <origin
+      xyz="-0.0090911 -0.12991 0.024732"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  
+  <!-- Wheel Left Link -->
+  <link
+    name="left_link">
+    <inertial>
+      <origin
+        xyz="0 1.6475730502119E-11 -0.0125"
+        rpy="0 0 0" />
+      <mass
+        value="0.139852680587454" />
+      <inertia
+        ixx="6.95414995242116E-05"
+        ixy="1.51612892963822E-30"
+        ixz="1.30897801338344E-33"
+        iyy="6.95414995242116E-05"
+        iyz="-7.24583115985977E-14"
+        izz="0.00012451501148723" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/left_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/left_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <!-- Wheel Left Joint -->
+  <joint
+    name="left_joint"
+    type="continuous">
+    <origin
+      xyz="-0.0078824 0.13275 0.025294"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="imu_link"/>
+
+
+  <gazebo reference="base_link">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="platform_link">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <!-- Wheels -->
+  <gazebo reference="left_link">
+    <material>Gazebo/Black</material>
+    <mu1>10000.0</mu1>
+    <mu2>10000.0</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+    <fdir1>1 0 0</fdir1>
+  </gazebo>
+
+  <gazebo reference="right_link">
+    <material>Gazebo/Black</material>
+    <mu1>10000.0</mu1>
+    <mu2>10000.0</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+    <fdir1>1 0 0</fdir1>
+  </gazebo>
+  <gazebo>
+  
+  <gazebo reference="front_link">
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="back_link">
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+    <!-- Plugin -->
+    <plugin name="wheel_drive_controller" filename="libgazebo_ros_diff_drive.so">
+
+      <!-- wheels -->
+      <num_wheel_pairs>1</num_wheel_pairs>
+      <left_joint>left_joint</left_joint>
+      <right_joint>right_joint</right_joint>
+  
+      <!-- kinematics -->
+      <wheel_separation>0.214</wheel_separation>
+      <wheel_diameter>0.084</wheel_diameter>
+      <max_wheel_torque>20.0</max_wheel_torque>
+      <max_wheel_acceleration>10.0</max_wheel_acceleration>
+  
+      <!-- odometry  --> 
+      <!-- <odometry_source>world</odometry_source>--> 
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
+  
+      <!-- topic & re remappings -->
+      <ros>
+        <namespace>/</namespace>
+        <argument>/cmd_vel:=cmd_vel</argument>
+        <argument>/odom:=odom</argument>
+      </ros>
+  
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>false</publish_wheel_tf>
+      <update_rate>100.0</update_rate>
+    </plugin>
+  </gazebo>
+
+  <!-- ************************* -->
+  <!-- ***** GAZEBO LASER ****** -->
+  <!-- ************************* -->
+  <gazebo reference="laser_link">
+      <material>Gazebo/Blue</material>
+
+      <sensor name="laser" type="ray">
+          <pose> 0 0 0 0 0 0 </pose>
+          <visualize>true</visualize>
+          <update_rate>5.0</update_rate>
+          <ray>
+              <scan>
+                  <horizontal>
+                      <samples>360</samples>
+                      <resolution>1</resolution>
+                      <min_angle>-3.14</min_angle>
+                      <max_angle>3.14</max_angle>
+                  </horizontal>
+              </scan>
+              <range>
+                  <min>0.120</min>
+                  <max>1.5</max>
+                  <resolution>0.015</resolution>
+              </range>
+          </ray>
+          <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+              <ros>
+                  <argument>~/out:=scan</argument>
+              </ros>
+              <output_type>sensor_msgs/LaserScan</output_type>
+              <frame_name>laser_frame</frame_name>
+          </plugin>
+      </sensor>
+  </gazebo>
+  
+  <!-- ************************* -->
+  <!-- **** GAZEBO CAM_LINK **** -->
+  <!-- ************************* -->
+  <gazebo reference="camera_link">
+      <material>Gazebo/Black</material>
+
+      <sensor name="camera" type="camera">
+          <pose> 0 0 0 0 0 0 </pose>
+          <visualize>true</visualize>
+          <update_rate>30</update_rate>
+          <camera>
+              <horizontal_fov>1.085595</horizontal_fov>
+              <image>
+                  <format>R8G8B8</format>
+                  <width>640</width>
+                  <height>480</height>
+              </image>
+              <clip>
+                  <near>0.03</near>
+                  <far>100</far>
+              </clip>
+          </camera>
+          <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+              <frame_name>camera_link</frame_name>
+          </plugin>
+      </sensor>
+  </gazebo>
+
+</robot>
