@@ -68,9 +68,9 @@ def generate_launch_description():
     return LaunchDescription([
         env_var,
         model_arg,
+        robot_state_publisher_node,
         declare_world_cmd,
         start_gazebo_server,
         start_gazebo_client,
-        robot_state_publisher_node,
         spawn_robot
     ])

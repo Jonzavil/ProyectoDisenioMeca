@@ -554,6 +554,7 @@
       <!-- odometry  --> 
       <!-- <odometry_source>world</odometry_source>--> 
       <odometry_frame>odom</odometry_frame>
+
       <robot_base_frame>base_footprint</robot_base_frame>
   
       <!-- topic & re remappings -->
@@ -585,8 +586,8 @@
                   <horizontal>
                       <samples>360</samples>
                       <resolution>1</resolution>
-                      <min_angle>-3.14</min_angle>
-                      <max_angle>3.14</max_angle>
+                      <min_angle>-1.57</min_angle>
+                      <max_angle>1.57</max_angle>
                   </horizontal>
               </scan>
               <range>
@@ -600,7 +601,7 @@
                   <argument>~/out:=scan</argument>
               </ros>
               <output_type>sensor_msgs/LaserScan</output_type>
-              <frame_name>laser_frame</frame_name>
+              <frame_name>laser_link</frame_name>
           </plugin>
       </sensor>
   </gazebo>
@@ -633,4 +634,27 @@
       </sensor>
   </gazebo>
 
+  <!-- ************************* -->
+  <!-- **** GAZEBO CAM_LINK **** -->
+  <!-- ************************* -->
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
 </robot>
