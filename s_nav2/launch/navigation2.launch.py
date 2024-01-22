@@ -34,7 +34,7 @@ def generate_launch_description():
         default=os.path.join(
             get_package_share_directory('s_nav2'),
             'map',
-            'map.yaml'))
+            'ramel.yaml'))
 
     param_dir = LaunchConfiguration(
         'params_file',
