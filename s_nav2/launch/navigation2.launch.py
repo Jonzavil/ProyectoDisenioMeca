@@ -41,7 +41,7 @@ def generate_launch_description():
         default=os.path.join(
             get_package_share_directory('s_nav2'),
             'param',
-            s.yaml))
+            's.yaml'))
 
     nav2_launch_file_dir = os.path.join(get_package_share_directory('nav2_bringup'), 'launch')
 
