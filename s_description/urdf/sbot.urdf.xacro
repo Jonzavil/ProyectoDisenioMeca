@@ -3,20 +3,6 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"
   name="srbot">
 
-    <!-- Colors -->
-    <material name="black">
-        <color rgba="0.0 0.0 0.0 1.0"/>
-    </material>
-
-    <material name="white">
-        <color rgba="1.0 1.0 1.0 1.0"/>
-    </material>
-
-    <material name="orange">
-        <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
-    </material>  
-
-
   <!-- Links -->
   <link name="base_footprint"/> 
 
@@ -25,17 +11,17 @@
     name="base_link">
     <inertial>
       <origin
-        xyz="-0.0356238870540699 -4.03106731601266E-05 0.121501088820445"
+        xyz="0.0331268533143592 -0.000432916937407213 0.053571397442181"
         rpy="0 0 0" />
       <mass
-        value="0.590576967248925" />
+        value="4.83639817381771" />
       <inertia
-        ixx="0.0046567534727676"
-        ixy="-3.38542710266083E-06"
-        ixz="-3.65561608583262E-05"
-        iyy="0.00284799695530918"
-        iyz="1.44504078186529E-05"
-        izz="0.00695313679415047" />
+        ixx="0.038861655670592"
+        ixy="0.000529616499918743"
+        ixz="0.0010173959314691"
+        iyy="0.0228312438973577"
+        iyz="3.82831626454934E-05"
+        izz="0.0575066455054651" />
     </inertial>
     <visual>
       <origin
@@ -48,7 +34,7 @@
       <material
         name="">
         <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+          rgba="0.964705882352941 0.964705882352941 0.952941176470588 1" />
       </material>
     </visual>
     <collision>
@@ -65,7 +51,7 @@
   <joint name="base_joint" type="fixed">
     <parent link="base_footprint"/>
     <child link="base_link"/>
-    <origin xyz="0.0 0.0 0.007" rpy="0 0 0"/>
+    <origin xyz="0.0 0.0 -0.007" rpy="0 0 0"/>
   </joint>
 
   <!-- Caster Link -->
@@ -73,17 +59,17 @@
     name="front_link">
     <inertial>
       <origin
-        xyz="0 -0.0053142329433118 0"
+        xyz="0 1.0842021724855E-19 0"
         rpy="0 0 0" />
       <mass
-        value="0.00502921680620392" />
+        value="0.012201049157502" />
       <inertia
-        ixx="2.27248756479945E-07"
-        ixy="4.42927350742589E-24"
+        ixx="9.95396738164981E-07"
+        ixy="4.75190822077712E-39"
         ixz="0"
-        iyy="2.27248756479945E-07"
-        iyz="0"
-        izz="2.27248756479945E-07" />
+        iyy="9.95396738164981E-07"
+        iyz="3.04752357318865E-23"
+        izz="9.95396738164981E-07" />
     </inertial>
     <visual>
       <origin
@@ -96,35 +82,33 @@
       <material
         name="">
         <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+          rgba="0.749019607843137 0.749019607843137 0.749019607843137 1" />
       </material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://s_description/meshes/front_link.STL" />
+          <!-- Cambiar a una esfera como modelo de colisión -->
+          <sphere radius="0.014281" />
       </geometry>
-    </collision>
+  </collision>
   </link>
 
   <link
     name="back_link">
     <inertial>
       <origin
-        xyz="0 0.0053142329433118 0"
+        xyz="1.11022302462516E-16 -6.93889390390723E-18 0"
         rpy="0 0 0" />
       <mass
-        value="0.00502921680620392" />
+        value="0.012201049157502" />
       <inertia
-        ixx="2.27248756479945E-07"
-        ixy="-4.42927350742589E-24"
-        ixz="0"
-        iyy="2.27248756479945E-07"
-        iyz="0"
-        izz="2.27248756479945E-07" />
+        ixx="9.95396738164982E-07"
+        ixy="-1.32348898008484E-23"
+        ixz="8.66927083731437E-38"
+        iyy="9.95396738164982E-07"
+        iyz="-4.80636454845762E-23"
+        izz="9.95396738164982E-07" />
     </inertial>
     <visual>
       <origin
@@ -137,34 +121,32 @@
       <material
         name="">
         <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+          rgba="0.749019607843137 0.749019607843137 0.749019607843137 1" />
       </material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://s_description/meshes/back_link.STL" />
+          <!-- Cambiar a una esfera como modelo de colisión -->
+          <sphere radius="0.014281" />
       </geometry>
-    </collision>
+  </collision>
   </link>
 
 
   <!-- Caster joint -->
   <joint
-    name="caster_joint"
+    name="caster_front_joint"
     type="revolute">
     <origin
-      xyz="0.1163 0.00023819 -0.0074277"
+      xyz="0.126 0 0.002981"
       rpy="-1.5708 0 0" />
     <parent
       link="base_link" />
     <child
       link="front_link" />
     <axis
-      xyz="1 1 0" />
+      xyz="1 1 1" />
     <limit
       lower="0"
       upper="0"
@@ -176,14 +158,14 @@
     name="caster_back_joint"
     type="revolute">
     <origin
-      xyz="-0.13399 0.0024897 -0.0073544"
-      rpy="1.5708 0 0" />
+      xyz="-0.091903 0 0.0054852"
+      rpy="-1.5708 0.077667 0" />
     <parent
       link="base_link" />
     <child
       link="back_link" />
     <axis
-      xyz="1 1 0" />
+      xyz="1 1 1" />
     <limit
       lower="0"
       upper="0"
@@ -197,17 +179,17 @@
     name="camera_link">
     <inertial>
       <origin
-        xyz="-0.0193111246434702 -0.0125131683373471 -8.98842853076509E-05"
+        xyz="-0.0130485733276654 0.000249057510941841 -6.02472496720186E-05"
         rpy="0 0 0" />
       <mass
-        value="0.182526920714148" />
+        value="0.0447531965749244" />
       <inertia
-        ixx="0.000396274804867751"
-        ixy="4.58837222141318E-08"
-        ixz="4.4761660275352E-08"
-        iyy="3.59896813484765E-05"
-        iyz="5.27435714959667E-09"
-        izz="0.00040519781076824" />
+        ixx="2.72747579788412E-05"
+        ixy="2.44896216734503E-07"
+        ixz="-1.00813722652812E-09"
+        iyy="3.94436239577304E-06"
+        iyz="-2.92468588333206E-09"
+        izz="2.73596827712822E-05" />
     </inertial>
     <visual>
       <origin
@@ -239,8 +221,8 @@
     name="camera_joint"
     type="fixed">
     <origin
-      xyz="0.17228 0.0093241 0.80525"
-      rpy="0 -0.13494 0" />
+      xyz="0.161 0 0.80167"
+      rpy="0 0 0" />
     <parent
       link="base_link" />
     <child
@@ -248,23 +230,25 @@
     <axis
       xyz="0 0 0" />
   </joint>
+
+
   <!-- Platform Link -->
 
   <link
-    name="platform_link">
+    name="body_link">
     <inertial>
       <origin
-        xyz="0.00524329305342652 -0.177275972417613 -3.07780343483111E-05"
+        xyz="0.0196490463239979 -0.00759747258083848 -2.54312289516001E-06"
         rpy="0 0 0" />
       <mass
-        value="5.20398239999135" />
+        value="5.3667835678089" />
       <inertia
-        ixx="0.146191138478855"
-        ixy="-0.00734378144066615"
-        ixz="-6.06196116860792E-08"
-        iyy="0.0824945087110923"
-        iyz="-8.40710972180585E-08"
-        izz="0.195280459107958" />
+        ixx="0.191852604126404"
+        ixy="-0.00180652023375761"
+        ixz="-5.31889404871528E-05"
+        iyy="0.101149701389595"
+        iyz="5.32146569402063E-05"
+        izz="0.16932952422593" />
     </inertial>
     <visual>
       <origin
@@ -272,7 +256,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://s_description/meshes/platform_link.STL" />
+          filename="package://s_description/meshes/body_link.STL" />
       </geometry>
       <material
         name="">
@@ -286,21 +270,126 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://s_description/meshes/platform_link.STL" />
+          filename="package://s_description/meshes/body_link.STL" />
       </geometry>
     </collision>
   </link>
-
   <joint
-    name="platform_joint"
+    name="body_joint"
     type="fixed">
     <origin
-      xyz="-0.011831 -0.00043758 0.69827"
+      xyz="-0.032907 0 0.38597"
       rpy="1.5708 0 0" />
     <parent
       link="base_link" />
     <child
-      link="platform_link" />
+      link="body_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="head_link">
+    <inertial>
+      <origin
+        xyz="0.00849493948773139 0.0238193372028268 0.000292060864239385"
+        rpy="0 0 0" />
+      <mass
+        value="1.07076821324471" />
+      <inertia
+        ixx="0.00952954443079687"
+        ixy="-0.000539065696028081"
+        ixz="-2.03838854365254E-05"
+        iyy="0.0107354116844579"
+        iyz="-3.6921034585701E-06"
+        izz="0.00438988033691154" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/head_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/head_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="head_joint"
+    type="fixed">
+    <origin
+      xyz="0.085023 8.857E-05 0.77053"
+      rpy="1.5708 0 -0.012333" />
+    <parent
+      link="base_link" />
+    <child
+      link="head_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="screen_link">
+    <inertial>
+      <origin
+        xyz="-0.00875103860863291 -0.00179905099732303 -0.0013426830002895"
+        rpy="0 0 0" />
+      <mass
+        value="0.291835845220698" />
+      <inertia
+        ixx="0.00153477162859971"
+        ixy="0.000200454438260883"
+        ixz="-5.38305946263596E-07"
+        iyy="0.00130267458234358"
+        iyz="-7.69451434566266E-07"
+        izz="0.000469996563152285" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/screen_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.749019607843137 0.749019607843137 0.749019607843137 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://s_description/meshes/screen_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="screen_joint"
+    type="fixed">
+    <origin
+      xyz="0.10714 0 0.88899"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="screen_link" />
     <axis
       xyz="0 0 0" />
   </joint>
@@ -310,17 +399,17 @@
     name="laser_link">
     <inertial>
       <origin
-        xyz="5.40724984460228E-05 0.000108936811619331 -0.0180203945533209"
+        xyz="1.09809412386364E-05 -9.50160934408695E-05 0.0112261274669363"
         rpy="0 0 0" />
       <mass
-        value="0.040289883202866" />
+        value="0.0403779088326407" />
       <inertia
-        ixx="7.61642400584036E-06"
-        ixy="-9.92757716952495E-08"
-        ixz="5.59827255517888E-09"
-        iyy="7.68825864701491E-06"
-        iyz="5.26103062084025E-08"
-        izz="8.28455531132897E-06" />
+        ixx="7.61672430725859E-06"
+        ixy="9.92757538260664E-08"
+        ixz="-5.59827664990937E-09"
+        iyy="7.68868886195227E-06"
+        iyz="5.26078383460514E-08"
+        izz="8.28485448822856E-06" />
     </inertial>
     <visual>
       <origin
@@ -333,7 +422,7 @@
       <material
         name="">
         <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+          rgba="0.690196078431373 0.690196078431373 0.690196078431373 1" />
       </material>
     </visual>
     <collision>
@@ -352,8 +441,8 @@
     name="laser_joint"
     type="fixed">
     <origin
-      xyz="-0.054235 0.010992 0.1782"
-      rpy="0 0 -0.021983" />
+      xyz="0.1 0 0.1428"
+      rpy="0 0 0" />
     <parent
       link="base_link" />
     <child
@@ -367,21 +456,21 @@
     name="right_link">
     <inertial>
       <origin
-        xyz="0 -1.6475730502119E-11 0.0125"
+        xyz="-2.22044604925031E-16 3.88578058618805E-16 -3.88578058618805E-16"
         rpy="0 0 0" />
       <mass
-        value="0.139852680587454" />
+        value="0.0610725611857856" />
       <inertia
-        ixx="6.95414995242117E-05"
-        ixy="1.51610541975121E-30"
-        ixz="1.72958450439112E-33"
-        iyy="6.95414995242117E-05"
-        iyz="-7.24583105646219E-14"
-        izz="0.00012451501148723" />
+        ixx="2.0932620346428E-05"
+        ixy="3.39520287514895E-38"
+        ixz="1.85730748238849E-38"
+        iyy="2.0932620346428E-05"
+        iyz="6.26429932491746E-21"
+        izz="3.95750196483891E-05" />
     </inertial>
     <visual>
       <origin
-        xyz="0 0 0"
+        xyz="0 0 -0.0001"
         rpy="0 0 0" />
       <geometry>
         <mesh
@@ -390,17 +479,15 @@
       <material
         name="">
         <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+          rgba="0.749019607843137 0.749019607843137 0.749019607843137 1" />
       </material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://s_description/meshes/right_link.STL" />
-      </geometry>
+        <origin xyz="0 0 -0.0001" rpy="0 0 0" />
+        <geometry>
+            <!-- Cambiar a un cilindro como modelo de colisión -->
+            <cylinder radius="0.036" length="0.015" />
+        </geometry>
     </collision>
   </link>
   
@@ -409,7 +496,7 @@
     name="right_joint"
     type="continuous">
     <origin
-      xyz="-0.0090911 -0.12991 0.024732"
+      xyz="-0.00049683 -0.11755 0.02507"
       rpy="-1.5708 0 0" />
     <parent
       link="base_link" />
@@ -424,21 +511,21 @@
     name="left_link">
     <inertial>
       <origin
-        xyz="0 1.6475730502119E-11 -0.0125"
+        xyz="-4.44089209850063E-16 3.95516952522712E-16 4.9960036108132E-16"
         rpy="0 0 0" />
       <mass
-        value="0.139852680587454" />
+        value="0.0610725611857854" />
       <inertia
-        ixx="6.95414995242116E-05"
-        ixy="1.51612892963822E-30"
-        ixz="1.30897801338344E-33"
-        iyy="6.95414995242116E-05"
-        iyz="-7.24583115985977E-14"
-        izz="0.00012451501148723" />
+        ixx="2.09326203464279E-05"
+        ixy="4.13994203062489E-27"
+        ixz="-2.29865717335984E-22"
+        iyy="2.09326203464279E-05"
+        iyz="-1.21249430195987E-20"
+        izz="3.95750196483889E-05" />
     </inertial>
     <visual>
       <origin
-        xyz="0 0 0"
+        xyz="0 0 -0.0001"
         rpy="0 0 0" />
       <geometry>
         <mesh
@@ -447,17 +534,15 @@
       <material
         name="">
         <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+          rgba="0.749019607843137 0.749019607843137 0.749019607843137 1" />
       </material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://s_description/meshes/left_link.STL" />
-      </geometry>
+        <origin xyz="0 0 -0.0001" rpy="0 0 0" />
+        <geometry>
+            <!-- Cambiar a un cilindro como modelo de colisión -->
+            <cylinder radius="0.036" length="0.015" />
+        </geometry>
     </collision>
   </link>
   
@@ -466,7 +551,7 @@
     name="left_joint"
     type="continuous">
     <origin
-      xyz="-0.0078824 0.13275 0.025294"
+      xyz="-0.00049683 0.11755 0.02107"
       rpy="-1.5708 0 0" />
     <parent
       link="base_link" />
@@ -489,8 +574,8 @@
     <material>Gazebo/DarkGrey</material>
   </gazebo>
 
-  <gazebo reference="platform_link">
-    <material>Gazebo/White</material>
+  <gazebo reference="body_link">
+    <material>Gazebo/Orange</material>
   </gazebo>
 
   <!-- Wheels -->
@@ -515,8 +600,7 @@
     <maxVel>0.1</maxVel>
     <fdir1>1 0 0</fdir1>
   </gazebo>
-  <gazebo>
-  
+
   <gazebo reference="front_link">
     <mu1>0.1</mu1>
     <mu2>0.1</mu2>
@@ -536,7 +620,7 @@
     <maxVel>1.0</maxVel>
     <material>Gazebo/FlatBlack</material>
   </gazebo>
-
+  <gazebo>
     <!-- Plugin -->
     <plugin name="wheel_drive_controller" filename="libgazebo_ros_diff_drive.so">
 
@@ -546,8 +630,8 @@
       <right_joint>right_joint</right_joint>
   
       <!-- kinematics -->
-      <wheel_separation>0.214</wheel_separation>
-      <wheel_diameter>0.084</wheel_diameter>
+      <wheel_separation>0.235100</wheel_separation>
+      <wheel_diameter>0.062</wheel_diameter>
       <max_wheel_torque>20.0</max_wheel_torque>
       <max_wheel_acceleration>10.0</max_wheel_acceleration>
   
@@ -591,7 +675,7 @@
                   </horizontal>
               </scan>
               <range>
-                  <min>0.120</min>
+                  <min>0.2</min>
                   <max>1.5</max>
                   <resolution>0.015</resolution>
               </range>
@@ -635,7 +719,7 @@
   </gazebo>
 
   <!-- ************************* -->
-  <!-- **** GAZEBO CAM_LINK **** -->
+  <!-- **** GAZEBO IMU_LINK **** -->
   <!-- ************************* -->
   <gazebo reference="imu_link">
     <gravity>true</gravity>
